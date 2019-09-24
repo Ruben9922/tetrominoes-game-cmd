@@ -1,6 +1,11 @@
-#include <iostream>
+#include <ncurses.h>
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    initscr();
+    cbreak();
+    noecho();
+    keypad(stdscr, TRUE);
+
+    endwin();
     return 0;
 }
