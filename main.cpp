@@ -1,4 +1,5 @@
 #include <ncurses.h>
+#include "mathfu/vector.h"
 
 int main() {
     initscr();
