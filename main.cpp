@@ -8,11 +8,14 @@
 
 int random_int(int max);
 
-void update(std::list<ShapeInstance> &shape_instances);
+void update(std::list<ShapeInstance> &shape_instances, ShapeInstance &shape_instance,
+            const std::vector<std::list<mathfu::vec2i>> &shapes);
 
 bool isShapeWithinScreenBounds(const ShapeInstance &shape_instance);
 
-void draw(const std::list<ShapeInstance> &shape_instances);
+void draw(const std::list<ShapeInstance> &shape_instances, const ShapeInstance &shape_instance);
+
+ShapeInstance generate_shape_instance(const std::vector<std::list<mathfu::vec2i>> &shapes);
 
 int main() {
     initscr();
@@ -66,19 +69,23 @@ int main() {
     };
 
     std::list<ShapeInstance> shape_instances;
-    int shape_index = random_int(shapes.size());
-    std::list<mathfu::vec2i> shape = shapes[shape_index];
-    shape_instances.emplace_back(shape, mathfu::vec2i(0, 0));
+    ShapeInstance moving_shape_instance = generate_shape_instance(shapes);
 
     do {
         timeout(500);
-        update(shape_instances);
-        draw(shape_instances);
+        update(shape_instances, moving_shape_instance, shapes);
+        draw(shape_instances, moving_shape_instance);
         getch();
     } while (true);
 
     endwin();
     return 0;
+}
+
+ShapeInstance generate_shape_instance(const std::vector<std::list<mathfu::vec2i>> &shapes) {
+    int shape_index = random_int(shapes.size());
+    std::list<mathfu::vec2i> shape = shapes[shape_index];
+    return {shape, mathfu::vec2i(0, 0)};
 }
 
 int random_int(int max) {
@@ -90,11 +97,13 @@ int random_int(int max) {
     return random_number;
 }
 
-void update(std::list<ShapeInstance> &shape_instances) {
-    for (ShapeInstance &shape_instance : shape_instances) {
-        if (isShapeWithinScreenBounds(shape_instance)) {
-            shape_instance.origin += {0, 1};
-        }
+void update(std::list<ShapeInstance> &shape_instances, ShapeInstance &shape_instance,
+            const std::vector<std::list<mathfu::vec2i>> &shapes) {
+    if (isShapeWithinScreenBounds(shape_instance)) {
+        shape_instance.origin += {0, 1};
+    } else {
+        shape_instances.push_back(shape_instance);
+        shape_instance = generate_shape_instance(shapes);
     }
 }
 
@@ -113,14 +122,14 @@ bool isShapeWithinScreenBounds(const ShapeInstance &shape_instance) {
     return true;
 }
 
-void draw(const std::list<ShapeInstance> &shape_instances) {
+void draw(const std::list<ShapeInstance> &shape_instances, const ShapeInstance &shape_instance) {
     clear();
 
-    for (const ShapeInstance &shape_instance : shape_instances) {
-        for (const mathfu::vec2i &point : shape_instance.shape) {
-            mvaddch(shape_instance.origin.y + point.y, shape_instance.origin.x + point.x, 'x');
-        }
+    for (const ShapeInstance &shape_instance_1 : shape_instances) {
+        shape_instance_1.draw();
     }
+
+    shape_instance.draw();
 }
 
 // TODO: Consider switching to C++ version of Curses library (e.g. AnsiGL)

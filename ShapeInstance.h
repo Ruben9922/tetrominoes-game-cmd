@@ -15,6 +15,7 @@ public:
     mathfu::vec2i origin{0, 0};
 
     ShapeInstance(const std::list<mathfu::vec2i> &shape, const mathfu::vec2i &origin);
+    void draw() const;
 };
 
 
