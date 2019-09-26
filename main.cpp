@@ -100,7 +100,6 @@ void draw(const std::list<ShapeInstance> &shape_instances) {
     for (const ShapeInstance &shape_instance : shape_instances) {
         for (const mathfu::vec2i &point : shape_instance.shape) {
             mvaddch(shape_instance.origin.y + point.y, shape_instance.origin.x + point.x, 'x');
-//                printf("%d,%d", shape_instance.origin.y + point.y, shape_instance.origin.x + point.x);
         }
     }
 }
