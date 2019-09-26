@@ -10,6 +10,8 @@ int random_int(int max);
 
 void update(std::list<ShapeInstance> &shape_instances);
 
+bool isShapeWithinScreenBounds(const ShapeInstance &shape_instance);
+
 void draw(const std::list<ShapeInstance> &shape_instances);
 
 int main() {
@@ -90,8 +92,25 @@ int random_int(int max) {
 
 void update(std::list<ShapeInstance> &shape_instances) {
     for (ShapeInstance &shape_instance : shape_instances) {
-        shape_instance.origin += {0, 1};
+        if (isShapeWithinScreenBounds(shape_instance)) {
+            shape_instance.origin += {0, 1};
+        }
     }
+}
+
+bool isShapeWithinScreenBounds(const ShapeInstance &shape_instance) {
+    ShapeInstance shape_instance_temp(shape_instance);
+    shape_instance_temp.origin += {0, 1};
+    for (const mathfu::vec2i &local_point : shape_instance_temp.shape) {
+        mathfu::vec2i world_point = shape_instance_temp.origin + local_point;
+
+        // Check computed WC point is actually within the screen bounds
+        bool withinBounds = world_point.x >= 0 && world_point.x < COLS && world_point.y >= 0 && world_point.y < LINES;
+        if (!withinBounds) {
+            return false;
+        }
+    }
+    return true;
 }
 
 void draw(const std::list<ShapeInstance> &shape_instances) {
