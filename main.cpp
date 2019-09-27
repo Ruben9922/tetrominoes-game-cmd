@@ -75,11 +75,18 @@ int main() {
     draw(shape_instances, moving_shape_instance);
     getch();
 
+    bool prevent_update = false;
     do {
-        update(shape_instances, moving_shape_instance, shapes);
+        if (!prevent_update) {
+            update(shape_instances, moving_shape_instance, shapes);
+        }
+        prevent_update = false;
         draw(shape_instances, moving_shape_instance);
 
         int key = getch();
+        if (key != ERR) {
+            prevent_update = true;
+        }
         switch (key) {
             case KEY_LEFT: {
                 const mathfu::vec2i left = {-1, 0};
