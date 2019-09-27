@@ -11,7 +11,7 @@ int random_int(int max);
 void update(std::list<ShapeInstance> &shape_instances, ShapeInstance &shape_instance,
             const std::vector<std::list<mathfu::vec2i>> &shapes);
 
-bool isShapeWithinScreenBounds(const ShapeInstance &shape_instance);
+bool isShapeWithinScreenBounds(const ShapeInstance &shape_instance, const mathfu::vec2i &translation);
 
 void draw(const std::list<ShapeInstance> &shape_instances, const ShapeInstance &shape_instance);
 
@@ -78,7 +78,24 @@ int main() {
     do {
         update(shape_instances, moving_shape_instance, shapes);
         draw(shape_instances, moving_shape_instance);
-        getch();
+
+        int key = getch();
+        switch (key) {
+            case KEY_LEFT: {
+                const mathfu::vec2i left = {-1, 0};
+                if (isShapeWithinScreenBounds(moving_shape_instance, left)) {
+                    moving_shape_instance.origin += left;
+                }
+                break;
+            }
+            case KEY_RIGHT: {
+                const mathfu::vec2i right = {1, 0};
+                if (isShapeWithinScreenBounds(moving_shape_instance, right)) {
+                    moving_shape_instance.origin += right;
+                }
+                break;
+            }
+        }
     } while (true);
 
     endwin();
@@ -102,17 +119,18 @@ int random_int(int max) {
 
 void update(std::list<ShapeInstance> &shape_instances, ShapeInstance &shape_instance,
             const std::vector<std::list<mathfu::vec2i>> &shapes) {
-    if (isShapeWithinScreenBounds(shape_instance)) {
-        shape_instance.origin += {0, 1};
+    const mathfu::vec2i down = {0, 1};
+    if (isShapeWithinScreenBounds(shape_instance, down)) {
+        shape_instance.origin += down;
     } else {
         shape_instances.push_back(shape_instance);
         shape_instance = generate_shape_instance(shapes);
     }
 }
 
-bool isShapeWithinScreenBounds(const ShapeInstance &shape_instance) {
+bool isShapeWithinScreenBounds(const ShapeInstance &shape_instance, const mathfu::vec2i &translation) {
     ShapeInstance shape_instance_temp(shape_instance);
-    shape_instance_temp.origin += {0, 1};
+    shape_instance_temp.origin += translation;
     for (const mathfu::vec2i &local_point : shape_instance_temp.shape) {
         mathfu::vec2i world_point = shape_instance_temp.origin + local_point;
 
