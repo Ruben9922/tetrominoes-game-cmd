@@ -80,13 +80,10 @@ int main() {
         if (!prevent_update) {
             update(shape_instances, moving_shape_instance, shapes);
         }
-        prevent_update = false;
         draw(shape_instances, moving_shape_instance);
 
         int key = getch();
-        if (key != ERR) {
-            prevent_update = true;
-        }
+        prevent_update = (key != ERR);
         switch (key) {
             case KEY_LEFT: {
                 const mathfu::vec2i left = {-1, 0};
