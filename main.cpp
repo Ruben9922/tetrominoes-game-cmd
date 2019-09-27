@@ -71,7 +71,9 @@ int main() {
 
     std::list<ShapeInstance> shape_instances;
     ShapeInstance moving_shape_instance = generate_shape_instance(shapes);
+
     draw(shape_instances, moving_shape_instance);
+    getch();
 
     do {
         update(shape_instances, moving_shape_instance, shapes);
