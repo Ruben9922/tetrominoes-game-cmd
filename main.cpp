@@ -11,7 +11,7 @@ int random_int(int max);
 void update(std::list<ShapeInstance> &shape_instances, ShapeInstance &shape_instance,
             const std::vector<std::list<mathfu::vec2i>> &shapes);
 
-bool isShapeWithinScreenBounds(const ShapeInstance &shape_instance, const mathfu::vec2i &translation);
+bool isShapeWithinScreenBounds(ShapeInstance shape_instance, const mathfu::vec2i &translation);
 
 void draw(const std::list<ShapeInstance> &shape_instances, const ShapeInstance &shape_instance);
 
@@ -128,11 +128,10 @@ void update(std::list<ShapeInstance> &shape_instances, ShapeInstance &shape_inst
     }
 }
 
-bool isShapeWithinScreenBounds(const ShapeInstance &shape_instance, const mathfu::vec2i &translation) {
-    ShapeInstance shape_instance_temp(shape_instance);
-    shape_instance_temp.origin += translation;
-    for (const mathfu::vec2i &local_point : shape_instance_temp.shape) {
-        mathfu::vec2i world_point = shape_instance_temp.origin + local_point;
+bool isShapeWithinScreenBounds(ShapeInstance shape_instance, const mathfu::vec2i &translation) {
+    shape_instance.origin += translation;
+    for (const mathfu::vec2i &local_point : shape_instance.shape) {
+        mathfu::vec2i world_point = shape_instance.origin + local_point;
 
         // Check computed WC point is actually within the screen bounds
         bool withinBounds = world_point.x >= 0 && world_point.x < COLS && world_point.y >= 0 && world_point.y < LINES;
