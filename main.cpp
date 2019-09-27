@@ -22,6 +22,7 @@ int main() {
     cbreak();
     noecho();
     keypad(stdscr, TRUE);
+    timeout(500);
 
     std::vector<std::list<mathfu::vec2i>> shapes = {
             {
@@ -73,7 +74,6 @@ int main() {
     draw(shape_instances, moving_shape_instance);
 
     do {
-        timeout(500);
         update(shape_instances, moving_shape_instance, shapes);
         draw(shape_instances, moving_shape_instance);
         getch();
