@@ -95,6 +95,8 @@ int main() {
                 }
                 break;
             }
+            default:
+                break;
         }
     } while (true);
 
