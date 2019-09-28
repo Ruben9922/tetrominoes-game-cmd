@@ -162,3 +162,4 @@ void draw(const std::list<ShapeInstance> &shape_instances, const ShapeInstance &
 
 // TODO: Consider switching to C++ version of Curses library (e.g. AnsiGL)
 // TODO: Collision detection - prevent shapes from overlapping
+// TODO: Fix segmentation fault
