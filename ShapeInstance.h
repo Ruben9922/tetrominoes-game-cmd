@@ -16,6 +16,7 @@ public:
 
     ShapeInstance(const std::list<mathfu::vec2i> &shape, const mathfu::vec2i &origin);
     void draw() const;
+    bool isShapeWithinScreenBounds(const mathfu::vec2i &translation);
 };
 
 

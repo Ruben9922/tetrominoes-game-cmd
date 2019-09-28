@@ -11,8 +11,6 @@ int random_int(int max);
 void update(std::list<ShapeInstance> &shape_instances, ShapeInstance &shape_instance,
             const std::vector<std::list<mathfu::vec2i>> &shapes);
 
-bool isShapeWithinScreenBounds(ShapeInstance shape_instance, const mathfu::vec2i &translation);
-
 void draw(const std::list<ShapeInstance> &shape_instances, const ShapeInstance &shape_instance);
 
 ShapeInstance generate_shape_instance(const std::vector<std::list<mathfu::vec2i>> &shapes);
@@ -86,7 +84,7 @@ int main() {
         switch (key) {
             case KEY_LEFT: {
                 const mathfu::vec2i left = {-1, 0};
-                if (isShapeWithinScreenBounds(moving_shape_instance, left)) {
+                if (moving_shape_instance.isShapeWithinScreenBounds(left)) {
                     moving_shape_instance.origin += left;
                 }
                 prevent_update = true;
@@ -94,7 +92,7 @@ int main() {
             }
             case KEY_RIGHT: {
                 const mathfu::vec2i right = {1, 0};
-                if (isShapeWithinScreenBounds(moving_shape_instance, right)) {
+                if (moving_shape_instance.isShapeWithinScreenBounds(right)) {
                     moving_shape_instance.origin += right;
                 }
                 prevent_update = true;
@@ -128,26 +126,12 @@ int random_int(int max) {
 void update(std::list<ShapeInstance> &shape_instances, ShapeInstance &shape_instance,
             const std::vector<std::list<mathfu::vec2i>> &shapes) {
     const mathfu::vec2i down = {0, 1};
-    if (isShapeWithinScreenBounds(shape_instance, down)) {
+    if (shape_instance.isShapeWithinScreenBounds(down)) {
         shape_instance.origin += down;
     } else {
         shape_instances.push_back(shape_instance);
         shape_instance = generate_shape_instance(shapes);
     }
-}
-
-bool isShapeWithinScreenBounds(ShapeInstance shape_instance, const mathfu::vec2i &translation) {
-    shape_instance.origin += translation;
-    for (const mathfu::vec2i &local_point : shape_instance.shape) {
-        mathfu::vec2i world_point = shape_instance.origin + local_point;
-
-        // Check computed WC point is actually within the screen bounds
-        bool withinBounds = world_point.x >= 0 && world_point.x < COLS && world_point.y >= 0 && world_point.y < LINES;
-        if (!withinBounds) {
-            return false;
-        }
-    }
-    return true;
 }
 
 void draw(const std::list<ShapeInstance> &shape_instances, const ShapeInstance &shape_instance) {
