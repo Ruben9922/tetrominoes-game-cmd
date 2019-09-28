@@ -109,7 +109,7 @@ int main() {
 }
 
 ShapeInstance generate_shape_instance(const std::vector<std::list<mathfu::vec2i>> &shapes) {
-    int shape_index = random_int(shapes.size());
+    int shape_index = random_int(shapes.size() - 1);
     std::list<mathfu::vec2i> shape = shapes[shape_index];
     return {shape, mathfu::vec2i(0, 0)};
 }
@@ -146,4 +146,3 @@ void draw(const std::list<ShapeInstance> &shape_instances, const ShapeInstance &
 
 // TODO: Consider switching to C++ version of Curses library (e.g. AnsiGL)
 // TODO: Collision detection - prevent shapes from overlapping
-// TODO: Fix segmentation fault
