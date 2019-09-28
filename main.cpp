@@ -83,13 +83,13 @@ int main() {
         draw(shape_instances, moving_shape_instance);
 
         int key = getch();
-        prevent_update = (key != ERR);
         switch (key) {
             case KEY_LEFT: {
                 const mathfu::vec2i left = {-1, 0};
                 if (isShapeWithinScreenBounds(moving_shape_instance, left)) {
                     moving_shape_instance.origin += left;
                 }
+                prevent_update = true;
                 break;
             }
             case KEY_RIGHT: {
@@ -97,9 +97,11 @@ int main() {
                 if (isShapeWithinScreenBounds(moving_shape_instance, right)) {
                     moving_shape_instance.origin += right;
                 }
+                prevent_update = true;
                 break;
             }
             default:
+                prevent_update = false;
                 break;
         }
     } while (true);
