@@ -20,3 +20,5 @@ int main() {
 // TODO: Sort out accessibility in Game class
 // TODO: Use C++ library for "timer"
 // TODO: Consider creating GameObject class (for features like drawing and collision detection) and have ShapeInstance inherit from it
+// TODO: Add scoring
+// TODO: Add menu and "game over" screens
