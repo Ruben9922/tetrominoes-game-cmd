@@ -22,3 +22,5 @@ int main() {
 // TODO: Consider creating GameObject class (for features like drawing and collision detection) and have ShapeInstance inherit from it
 // TODO: Add scoring
 // TODO: Add menu and "game over" screens
+// TODO: Allow rotating moving shape instance
+// TODO: Properly implement being able to quickly move the shape downwards (in the 2 different ways)
