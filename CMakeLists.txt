@@ -3,7 +3,7 @@ project(tetrominoes_game_cmd)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(tetrominoes_game_cmd main.cpp ShapeInstance.cpp ShapeInstance.h)
+add_executable(tetrominoes_game_cmd main.cpp ShapeInstance.cpp ShapeInstance.h Game.cpp Game.h)
 target_link_libraries(${PROJECT_NAME} ncurses)
 
 # Include MathFu in this project with test and benchmark builds disabled
