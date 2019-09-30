@@ -1,11 +1,5 @@
 #include <ncurses.h>
-#include "mathfu/vector.h"
-#include "mathfu/glsl_mappings.h"
-#include "ShapeInstance.h"
 #include "Game.h"
-#include <list>
-#include <vector>
-#include <random>
 
 int main() {
     initscr();

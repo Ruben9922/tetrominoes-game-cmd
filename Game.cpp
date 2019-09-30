@@ -5,6 +5,10 @@
 #include <random>
 #include "Game.h"
 #include <ncurses.h>
+#include <vector>
+#include <list>
+#include "mathfu/vector.h"
+#include "mathfu/glsl_mappings.h"
 
 ShapeInstance Game::generate_shape_instance(const std::vector<std::list<mathfu::vec2i>> &shapes) {
     int shape_index = random_int(shapes.size() - 1);

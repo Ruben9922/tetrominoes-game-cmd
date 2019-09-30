@@ -2,13 +2,12 @@
 // Created by ruben on 25/09/2019.
 //
 
-#include <random>
-#include <vector>
 #include <list>
 #include "mathfu/glsl_mappings.h"
 #include "mathfu/vector.h"
 #include "ShapeInstance.h"
 #include <ncurses.h>
+#include <algorithm>
 
 ShapeInstance::ShapeInstance(const std::list<mathfu::vec2i> &shape, const mathfu::vec2i &origin) : shape(shape),
                                                                                                    origin(origin) {}

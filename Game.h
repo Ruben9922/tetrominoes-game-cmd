@@ -8,6 +8,7 @@
 
 #include <mathfu/glsl_mappings.h>
 #include <vector>
+#include <list>
 #include "ShapeInstance.h"
 
 class Game {
