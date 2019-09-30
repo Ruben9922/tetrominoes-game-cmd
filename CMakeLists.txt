@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 project(tetrominoes_game_cmd)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 add_executable(tetrominoes_game_cmd main.cpp ShapeInstance.cpp ShapeInstance.h Game.cpp Game.h)
 target_link_libraries(${PROJECT_NAME} ncurses)
