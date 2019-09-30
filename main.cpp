@@ -24,3 +24,4 @@ int main() {
 // TODO: Add menu and "game over" screens
 // TODO: Allow rotating moving shape instance
 // TODO: Properly implement being able to quickly move the shape downwards (in the 2 different ways)
+// TODO: Make size of playable area fixed and mark the "un-playable" area
