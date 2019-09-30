@@ -58,9 +58,9 @@ public:
             },
     };
     std::list<ShapeInstance> shape_instances;
-    ShapeInstance moving_shape_instance = generate_shape_instance(shapes);
+    ShapeInstance moving_shape_instance = generate_shape_instance();
 
-    ShapeInstance generate_shape_instance(const std::vector<std::list<mathfu::vec2i>> &shapes);
+    ShapeInstance generate_shape_instance();
     void play();
     void update();
     void draw();

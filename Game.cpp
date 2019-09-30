@@ -10,7 +10,7 @@
 #include "mathfu/vector.h"
 #include "mathfu/glsl_mappings.h"
 
-ShapeInstance Game::generate_shape_instance(const std::vector<std::list<mathfu::vec2i>> &shapes) {
+ShapeInstance Game::generate_shape_instance() {
     int shape_index = random_int(shapes.size() - 1);
     std::list<mathfu::vec2i> shape = shapes[shape_index];
 
@@ -63,7 +63,7 @@ void Game::update() {
         moving_shape_instance.origin += down;
     } else {
         shape_instances.push_back(moving_shape_instance);
-        moving_shape_instance = generate_shape_instance(shapes);
+        moving_shape_instance = generate_shape_instance();
     }
 }
 
