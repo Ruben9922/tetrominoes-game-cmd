@@ -13,7 +13,10 @@
 ShapeInstance Game::generate_shape_instance(const std::vector<std::list<mathfu::vec2i>> &shapes) {
     int shape_index = random_int(shapes.size() - 1);
     std::list<mathfu::vec2i> shape = shapes[shape_index];
-    return {shape, mathfu::vec2i(0, 0)};
+
+    mathfu::vec2i origin(COLS / 2, 0);
+
+    return {shape, origin};
 }
 
 void Game::play() {
