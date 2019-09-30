@@ -33,3 +33,33 @@ bool ShapeInstance::isShapeWithinScreenBounds(const mathfu::vec2i &translation) 
     }
     return true;
 }
+
+bool ShapeInstance::checkForCollision(const mathfu::vec2i &translation,
+                                      const std::list<ShapeInstance> &shape_instances) {
+    ShapeInstance shape_instance_temp(*this);
+    shape_instance_temp.origin += translation;
+
+    for (const ShapeInstance &shape_instance : shape_instances) {
+        std::list<mathfu::vec2i> shape_instance_temp_world;
+        std::list<mathfu::vec2i> shape_instance_world;
+
+        std::transform(shape_instance_temp.shape.begin(), shape_instance_temp.shape.end(),
+                       std::back_inserter(shape_instance_temp_world),
+                       [shape_instance_temp](const mathfu::vec2i &p) -> mathfu::vec2i {
+                           return shape_instance_temp.origin + p;
+                       });
+        std::transform(shape_instance.shape.begin(), shape_instance.shape.end(),
+                       std::back_inserter(shape_instance_world),
+                       [shape_instance](const mathfu::vec2i &p) -> mathfu::vec2i {
+                           return shape_instance.origin + p;
+                       });
+
+        bool collision = std::find_first_of(shape_instance_temp_world.begin(), shape_instance_temp_world.end(),
+                                            shape_instance_world.begin(), shape_instance_world.end()) !=
+                         shape_instance_temp_world.end();
+        if (collision) {
+            return true;
+        }
+    }
+    return false;
+}

@@ -84,7 +84,8 @@ int main() {
         switch (key) {
             case KEY_LEFT: {
                 const mathfu::vec2i left = {-1, 0};
-                if (moving_shape_instance.isShapeWithinScreenBounds(left)) {
+                if (moving_shape_instance.isShapeWithinScreenBounds(left) &&
+                    !moving_shape_instance.checkForCollision(left, shape_instances)) {
                     moving_shape_instance.origin += left;
                 }
                 prevent_update = true;
@@ -92,7 +93,8 @@ int main() {
             }
             case KEY_RIGHT: {
                 const mathfu::vec2i right = {1, 0};
-                if (moving_shape_instance.isShapeWithinScreenBounds(right)) {
+                if (moving_shape_instance.isShapeWithinScreenBounds(right) &&
+                    !moving_shape_instance.checkForCollision(right, shape_instances)) {
                     moving_shape_instance.origin += right;
                 }
                 prevent_update = true;
@@ -126,7 +128,7 @@ int random_int(int max) {
 void update(std::list<ShapeInstance> &shape_instances, ShapeInstance &shape_instance,
             const std::vector<std::list<mathfu::vec2i>> &shapes) {
     const mathfu::vec2i down = {0, 1};
-    if (shape_instance.isShapeWithinScreenBounds(down)) {
+    if (shape_instance.isShapeWithinScreenBounds(down) && !shape_instance.checkForCollision(down, shape_instances)) {
         shape_instance.origin += down;
     } else {
         shape_instances.push_back(shape_instance);
