@@ -17,3 +17,6 @@ int main() {
 }
 
 // TODO: Consider switching to C++ version of Curses library (e.g. AnsiGL)
+// TODO: Sort out accessibility in Game class
+// TODO: Use C++ library for "timer"
+// TODO: Consider creating GameObject class (for features like drawing and collision detection) and have ShapeInstance inherit from it
