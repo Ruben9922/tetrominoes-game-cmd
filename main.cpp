@@ -21,6 +21,7 @@ int main() {
     noecho();
     keypad(stdscr, TRUE);
     timeout(500);
+    curs_set(0);
 
     std::vector<std::list<mathfu::vec2i>> shapes = {
             {
