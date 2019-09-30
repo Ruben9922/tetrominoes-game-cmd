@@ -26,4 +26,3 @@ int main() {
 // TODO: Properly implement being able to quickly move the shape downwards (in the 2 different ways)
 // TODO: Make size of playable area fixed and mark the "un-playable" area
 // TODO: Make completely filled horizontal line disappear and incorporate into scoring
-// TODO: Fix naming of functions

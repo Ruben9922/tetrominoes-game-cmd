@@ -34,8 +34,8 @@ void Game::play() {
         switch (key) {
             case KEY_LEFT: {
                 const mathfu::vec2i left = {-1, 0};
-                if (moving_shape_instance.isShapeWithinScreenBounds(left) &&
-                    !moving_shape_instance.checkForCollision(left, shape_instances)) {
+                if (moving_shape_instance.is_shape_within_screen_bounds(left) &&
+                    !moving_shape_instance.check_for_collision(left, shape_instances)) {
                     moving_shape_instance.origin += left;
                 }
                 prevent_update = true;
@@ -43,8 +43,8 @@ void Game::play() {
             }
             case KEY_RIGHT: {
                 const mathfu::vec2i right = {1, 0};
-                if (moving_shape_instance.isShapeWithinScreenBounds(right) &&
-                    !moving_shape_instance.checkForCollision(right, shape_instances)) {
+                if (moving_shape_instance.is_shape_within_screen_bounds(right) &&
+                    !moving_shape_instance.check_for_collision(right, shape_instances)) {
                     moving_shape_instance.origin += right;
                 }
                 prevent_update = true;
@@ -59,7 +59,8 @@ void Game::play() {
 
 void Game::update() {
     const mathfu::vec2i down = {0, 1};
-    if (moving_shape_instance.isShapeWithinScreenBounds(down) && !moving_shape_instance.checkForCollision(down, shape_instances)) {
+    if (moving_shape_instance.is_shape_within_screen_bounds(down) && !moving_shape_instance.check_for_collision(down,
+                                                                                                                shape_instances)) {
         moving_shape_instance.origin += down;
     } else {
         shape_instances.push_back(moving_shape_instance);

@@ -18,7 +18,7 @@ void ShapeInstance::draw() const {
     }
 }
 
-bool ShapeInstance::isShapeWithinScreenBounds(const mathfu::vec2i &translation) {
+bool ShapeInstance::is_shape_within_screen_bounds(const mathfu::vec2i &translation) {
     ShapeInstance shape_instance_temp(*this);
     shape_instance_temp.origin += translation;
     for (const mathfu::vec2i &local_point : shape_instance_temp.shape) {
@@ -33,8 +33,8 @@ bool ShapeInstance::isShapeWithinScreenBounds(const mathfu::vec2i &translation) 
     return true;
 }
 
-bool ShapeInstance::checkForCollision(const mathfu::vec2i &translation,
-                                      const std::list<ShapeInstance> &shape_instances) {
+bool ShapeInstance::check_for_collision(const mathfu::vec2i &translation,
+                                        const std::list<ShapeInstance> &shape_instances) {
     ShapeInstance shape_instance_temp(*this);
     shape_instance_temp.origin += translation;
 
