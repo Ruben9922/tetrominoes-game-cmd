@@ -14,7 +14,7 @@ ShapeInstance Game::generate_shape_instance(const std::vector<std::list<mathfu::
     int shape_index = random_int(shapes.size() - 1);
     std::list<mathfu::vec2i> shape = shapes[shape_index];
 
-    mathfu::vec2i origin(COLS / 2, 0);
+    mathfu::vec2i origin((COLS - shape_width(shape)) / 2, 0);
 
     return {shape, origin};
 }
@@ -84,4 +84,10 @@ int Game::random_int(int max) {
 
     int random_number = distr(eng);
     return random_number;
+}
+
+int Game::shape_width(const std::list<mathfu::vec2i> &shape) {
+    auto[min, max] = std::minmax_element(shape.begin(), shape.end(),
+                                         [](const mathfu::vec2i &v1, const mathfu::vec2i &v2) { return v1.x < v2.x; });
+    return max->x - min->x + 1;
 }
