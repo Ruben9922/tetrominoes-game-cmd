@@ -18,6 +18,7 @@ public:
     void draw() const;
     bool is_shape_within_screen_bounds(const mathfu::vec2i &translation);
     bool check_for_collision(const mathfu::vec2i &translation, const std::list<ShapeInstance> &shape_instances);
+    void rotate();
 };
 
 

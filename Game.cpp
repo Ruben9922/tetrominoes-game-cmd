@@ -50,6 +50,10 @@ void Game::play() {
                 prevent_update = true;
                 break;
             }
+            case 'z':
+                moving_shape_instance.rotate();
+                prevent_update = true;
+                break;
             default:
                 prevent_update = false;
                 break;

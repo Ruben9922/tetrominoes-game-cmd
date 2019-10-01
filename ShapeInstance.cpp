@@ -62,3 +62,11 @@ bool ShapeInstance::check_for_collision(const mathfu::vec2i &translation,
     }
     return false;
 }
+
+void ShapeInstance::rotate() {
+    for (mathfu::vec2i &point : shape) {
+        int x_old = point.x;
+        point.x = -point.y;
+        point.y = x_old;
+    }
+}
