@@ -96,3 +96,9 @@ int Game::shape_width(const std::list<mathfu::vec2i> &shape) {
                                          [](const mathfu::vec2i &v1, const mathfu::vec2i &v2) { return v1.x < v2.x; });
     return max->x - min->x + 1;
 }
+
+int Game::shape_height(const std::list<mathfu::vec2i> &shape) {
+    auto[min, max] = std::minmax_element(shape.begin(), shape.end(),
+                                         [](const mathfu::vec2i &v1, const mathfu::vec2i &v2) { return v1.y < v2.y; });
+    return max->y - min->y + 1;
+}

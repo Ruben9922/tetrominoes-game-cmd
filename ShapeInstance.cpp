@@ -6,6 +6,7 @@
 #include "mathfu/glsl_mappings.h"
 #include "mathfu/vector.h"
 #include "ShapeInstance.h"
+#include "Game.h"
 #include <ncurses.h>
 #include <algorithm>
 
@@ -64,9 +65,17 @@ bool ShapeInstance::check_for_collision(const mathfu::vec2i &translation,
 }
 
 void ShapeInstance::rotate() {
+    mathfu::vec2i centre((Game::shape_width(shape) - 1) / 2, (Game::shape_height(shape) - 1) / 2);
     for (mathfu::vec2i &point : shape) {
+        // Translate so that effectively the centre is (0,0); this means the point is rotated around centre not (0,0)
+        point -= centre;
+
+        // Actually rotate the point by 90 degrees
         int x_old = point.x;
         point.x = -point.y;
         point.y = x_old;
+
+        // Reverse translation performed earlier
+        point += centre;
     }
 }

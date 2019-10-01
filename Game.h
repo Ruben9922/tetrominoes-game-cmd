@@ -66,6 +66,7 @@ public:
     void draw();
     static int random_int(int max);
     static int shape_width(const std::list<mathfu::vec2i> &shape);
+    static int shape_height(const std::list<mathfu::vec2i> &shape);
 };
 
 
