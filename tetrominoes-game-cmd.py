@@ -112,7 +112,7 @@ class Game:
         else:
             velocity = (1, 0)
 
-        if self.moving_shape_instance.is_within_window(velocity):
+        if self.moving_shape_instance.is_within_window(velocity) and not self.check_for_collision(velocity):
             self.moving_shape_instance.position = (self.moving_shape_instance.position[0] + velocity[0],
                                                    self.moving_shape_instance.position[1] + velocity[1])
         else:
@@ -126,6 +126,19 @@ class Game:
             shape_instance.draw()
 
         self.moving_shape_instance.draw()
+
+    def check_for_collision(self, translation=(0, 0)):
+        # Translate the moving shape instance's cells by the given translation
+        shape_instance_cells_translated = map(lambda c: (c[0] + translation[0], c[1] + translation[1]),
+                                              self.moving_shape_instance.get_cells_world())
+        # For each shape instance, check whether its cells are disjoint from the moving shape instances's cells
+        # (i.e. whether their intersection is empty - none of the cells overlap)
+        # If not, there has been a collision between this shape instance and the moving shape instance
+        # Obviously want to return True if the moving shape instance has collided with *any* shape instance (hence using
+        # `any` function)
+        # In other words, check whether the moving shape instance's cells overlap with any shape instance's cells
+        return any(map(lambda si: not set(shape_instance_cells_translated).isdisjoint(si.get_cells_world()),
+                       self.shape_instances))
 
 
 def main(stdscr):
