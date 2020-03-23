@@ -10,8 +10,6 @@ class Shape:
     def size(self):
         xs = list(map(lambda c: c[1], self.cells))
         ys = list(map(lambda c: c[0], self.cells))
-        print("hello")
-        print(ys)
         return ((max(ys) - min(ys) + 1) if ys else 0), ((max(xs) - min(xs) + 1) if xs else 0)
 
 
