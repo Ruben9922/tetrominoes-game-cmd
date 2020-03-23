@@ -105,12 +105,12 @@ class Game:
         self.stdscr.nodelay(False)
 
     def update(self, key):
-        velocity = (1, 0)
-
         if key == curses.KEY_LEFT:
             velocity = (0, -1)
         elif key == curses.KEY_RIGHT:
             velocity = (0, 1)
+        else:
+            velocity = (1, 0)
 
         if self.moving_shape_instance.is_within_window(velocity):
             self.moving_shape_instance.position = (self.moving_shape_instance.position[0] + velocity[0],
